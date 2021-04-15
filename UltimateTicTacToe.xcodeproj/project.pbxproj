@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930CBE3F26273AF40046086D /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CBE3E26273AF40046086D /* SquareView.swift */; };
+		9360475B2627257500DC8922 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475A2627257500DC8922 /* MainMenuView.swift */; };
+		9360475E26272EE400DC8922 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475D26272EE400DC8922 /* GameView.swift */; };
+		93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93785E4A2627D4E8004FB1F0 /* BoardView.swift */; };
 		93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */; };
 		93E9BE162625313300DB99B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE152625313300DB99B1 /* ContentView.swift */; };
 		93E9BE182625313400DB99B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93E9BE172625313400DB99B1 /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		930CBE3E26273AF40046086D /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		9360475A2627257500DC8922 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		9360475D26272EE400DC8922 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		93785E4A2627D4E8004FB1F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		93E9BE102625313300DB99B1 /* UltimateTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltimateTicTacToeApp.swift; sourceTree = "<group>"; };
 		93E9BE152625313300DB99B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +41,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		936047592627256700DC8922 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9360475A2627257500DC8922 /* MainMenuView.swift */,
+				9360475D26272EE400DC8922 /* GameView.swift */,
+				930CBE3E26273AF40046086D /* SquareView.swift */,
+				93785E4A2627D4E8004FB1F0 /* BoardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		93E9BE072625313300DB99B1 = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +71,7 @@
 		93E9BE122625313300DB99B1 /* UltimateTicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				936047592627256700DC8922 /* Views */,
 				93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */,
 				93E9BE152625313300DB99B1 /* ContentView.swift */,
 				93E9BE172625313400DB99B1 /* Assets.xcassets */,
@@ -138,7 +158,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9360475B2627257500DC8922 /* MainMenuView.swift in Sources */,
+				930CBE3F26273AF40046086D /* SquareView.swift in Sources */,
 				93E9BE162625313300DB99B1 /* ContentView.swift in Sources */,
+				93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */,
+				9360475E26272EE400DC8922 /* GameView.swift in Sources */,
 				93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +293,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
+				DEVELOPMENT_TEAM = S8CK6858AC;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = UltimateTicTacToe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -290,6 +315,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
+				DEVELOPMENT_TEAM = S8CK6858AC;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = UltimateTicTacToe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

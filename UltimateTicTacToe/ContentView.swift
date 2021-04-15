@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    /// Set to true when the GameView is showing
+    @State private var showingGame = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if showingGame {
+            GameView()
+        } else {
+            MainMenuView(showingGame: $showingGame)
+        }
     }
 }
 
