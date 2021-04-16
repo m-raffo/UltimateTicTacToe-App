@@ -43,11 +43,13 @@ struct GameView: View {
     
     /// The amount of padding from the edge of the main board to the miniboard
     var p: Int = 10
-
+    
+    @State var game:OpaquePointer? = CreateCppClass();
+    @State var board: [Int] = [Int](repeating: 0, count: 81);
         
     var body: some View {
         ZStack {
-            BoardView(p: p, po: po)
+            BoardView(p: p, po: po, board: $board, game: $game)
             
             GeometryReader { geometry in
                 // Amount of space above the board

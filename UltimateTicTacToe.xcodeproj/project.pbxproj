@@ -11,6 +11,10 @@
 		9360475B2627257500DC8922 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475A2627257500DC8922 /* MainMenuView.swift */; };
 		9360475E26272EE400DC8922 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475D26272EE400DC8922 /* GameView.swift */; };
 		93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93785E4A2627D4E8004FB1F0 /* BoardView.swift */; };
+		937B88A92628721A007F030C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937B88A82628721A007F030C /* Game.swift */; };
+		937B88B62628767D007F030C /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88B42628767D007F030C /* GameState.cpp */; };
+		937B88B72628767D007F030C /* Minimax.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88B52628767D007F030C /* Minimax.cpp */; };
+		937B88BD2628D5B8007F030C /* MinimaxWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */; };
 		93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */; };
 		93E9BE162625313300DB99B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE152625313300DB99B1 /* ContentView.swift */; };
 		93E9BE182625313400DB99B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93E9BE172625313400DB99B1 /* Assets.xcassets */; };
@@ -22,6 +26,14 @@
 		9360475A2627257500DC8922 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		9360475D26272EE400DC8922 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		93785E4A2627D4E8004FB1F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		937B88A82628721A007F030C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		937B88B22628767D007F030C /* GameState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
+		937B88B32628767D007F030C /* Minimax.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Minimax.hpp; sourceTree = "<group>"; };
+		937B88B42628767D007F030C /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		937B88B52628767D007F030C /* Minimax.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Minimax.cpp; sourceTree = "<group>"; };
+		937B88BB2628D5B8007F030C /* MinimaxWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MinimaxWrapper.hpp; sourceTree = "<group>"; };
+		937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = MinimaxWrapper.cpp; sourceTree = "<group>"; };
+		937B88C22628D7AD007F030C /* UltimateTicTacToe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltimateTicTacToe-Bridging-Header.h"; sourceTree = "<group>"; };
 		93E9BE102625313300DB99B1 /* UltimateTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltimateTicTacToeApp.swift; sourceTree = "<group>"; };
 		93E9BE152625313300DB99B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +64,28 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		937B88A726286F47007F030C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				937B88A82628721A007F030C /* Game.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		937B88AC26287502007F030C /* Cpp */ = {
+			isa = PBXGroup;
+			children = (
+				937B88B42628767D007F030C /* GameState.cpp */,
+				937B88B22628767D007F030C /* GameState.hpp */,
+				937B88B52628767D007F030C /* Minimax.cpp */,
+				937B88B32628767D007F030C /* Minimax.hpp */,
+				937B88BB2628D5B8007F030C /* MinimaxWrapper.hpp */,
+				937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */,
+				937B88C22628D7AD007F030C /* UltimateTicTacToe-Bridging-Header.h */,
+			);
+			path = Cpp;
+			sourceTree = "<group>";
+		};
 		93E9BE072625313300DB99B1 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +105,8 @@
 		93E9BE122625313300DB99B1 /* UltimateTicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				937B88AC26287502007F030C /* Cpp */,
+				937B88A726286F47007F030C /* Models */,
 				936047592627256700DC8922 /* Views */,
 				93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */,
 				93E9BE152625313300DB99B1 /* ContentView.swift */,
@@ -120,6 +156,7 @@
 				TargetAttributes = {
 					93E9BE0F2625313300DB99B1 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -160,10 +197,14 @@
 			files = (
 				9360475B2627257500DC8922 /* MainMenuView.swift in Sources */,
 				930CBE3F26273AF40046086D /* SquareView.swift in Sources */,
+				937B88A92628721A007F030C /* Game.swift in Sources */,
 				93E9BE162625313300DB99B1 /* ContentView.swift in Sources */,
 				93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */,
+				937B88BD2628D5B8007F030C /* MinimaxWrapper.cpp in Sources */,
 				9360475E26272EE400DC8922 /* GameView.swift in Sources */,
 				93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */,
+				937B88B72628767D007F030C /* Minimax.cpp in Sources */,
+				937B88B62628767D007F030C /* GameState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +332,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = S8CK6858AC;
@@ -303,6 +345,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.Sparky4825.UltimateTicTacToe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UltimateTicTacToe/Cpp/UltimateTicTacToe-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -313,6 +357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = S8CK6858AC;
@@ -325,6 +370,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.Sparky4825.UltimateTicTacToe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UltimateTicTacToe/Cpp/UltimateTicTacToe-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

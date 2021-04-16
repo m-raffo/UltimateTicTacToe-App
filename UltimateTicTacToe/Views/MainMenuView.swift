@@ -40,7 +40,16 @@ struct MainMenuView: View {
                 
                 Spacer()
                 
-                Button(action:{}) {
+                Button(action:{
+                    
+                    var board:OpaquePointer? = nil;
+
+                    board = CreateCppClass();
+                    Move(board, 0, 0);
+                    print(GetPosition(board, 0, 0));
+                    ReleaseCppClass(board);
+                    
+                }) {
                     Text("Player\nvs\nPlayer")
                             .fontWeight(.bold)
                             .font(.title)
