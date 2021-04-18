@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MainMenuView: View {
     @Binding var showingGame: Bool
+    
+    let model: ModelDataHandler? = ModelDataHandler()
+    
     var body: some View {
         
         NavigationView {
@@ -42,13 +45,8 @@ struct MainMenuView: View {
                 
                 Button(action:{
                     
-                    var board:OpaquePointer? = nil;
-
-                    board = CreateCppClass();
-                    Move(board, 0, 0);
-                    print(GetPosition(board, 0, 0));
-                    ReleaseCppClass(board);
-                    
+                    print("Test here")
+                                        
                 }) {
                     Text("Player\nvs\nPlayer")
                             .fontWeight(.bold)

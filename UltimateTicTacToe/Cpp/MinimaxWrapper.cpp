@@ -33,6 +33,10 @@ int IsValidMove(CGameState * c, int board, int piece) {
     return c->isValidMove(board, piece);
 }
 
+int GetRequiredBoard(CGameState * c) {
+    return c->getRequiredBoard();
+}
+
 CboardCoords MinimaxSearchMove(CGameState * position, int depth, int playAsX) {
     CboardCoords result;
     

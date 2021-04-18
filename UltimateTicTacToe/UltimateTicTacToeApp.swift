@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import TensorFlowLite
 
 @main
 struct UltimateTicTacToeApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

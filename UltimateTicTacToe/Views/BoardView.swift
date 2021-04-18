@@ -14,9 +14,9 @@ struct BoardView: View {
     /// The amount of padding from the edge of the main board to the miniboard
     var po: Int
     
-    @Binding var board: [Int]
-    @Binding var game:OpaquePointer?
+    @Binding var game:Game
     
+    @ViewBuilder
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -35,18 +35,19 @@ struct BoardView: View {
                                 
                                 ForEach(0..<3) { boardX in
                                     // Stack of rows of spaecs (ie boards)
+                                    
                                     VStack () {
                                         ForEach(0..<3) { y in
                                             HStack(spacing:0) {
                                                 ForEach(0..<3) {x in
                                                     
-                                                    SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), board: $board, game: $game)
+                                                    SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), game: $game)
                                                 }
                                                 
                                             }
                                         }
                                         
-                                    }
+                                    }.background(game.bgColors[boardY * 3 + boardX])
                                 }
                             }.padding(CGFloat(p /  2))
                         }
@@ -63,6 +64,6 @@ struct BoardView: View {
 
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
-        BoardView(p: 10, po: 20, board: .constant(Array.init(repeating: 0, count: 81)), game: .constant(CreateCppClass()))
+        BoardView(p: 10, po: 20, game: .constant(Game()))
     }
 }
