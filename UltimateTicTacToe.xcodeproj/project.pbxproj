@@ -13,10 +13,13 @@
 		9360475E26272EE400DC8922 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475D26272EE400DC8922 /* GameView.swift */; };
 		93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93785E4A2627D4E8004FB1F0 /* BoardView.swift */; };
 		937B88A92628721A007F030C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937B88A82628721A007F030C /* Game.swift */; };
-		937B88B62628767D007F030C /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88B42628767D007F030C /* GameState.cpp */; };
-		937B88B72628767D007F030C /* Minimax.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88B52628767D007F030C /* Minimax.cpp */; };
 		937B88BD2628D5B8007F030C /* MinimaxWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */; };
 		93CEB181262CBB380085EAE1 /* ModelDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CEB180262CBB380085EAE1 /* ModelDataHandler.swift */; };
+		93CEB18B262CCD4B0085EAE1 /* MonteCarlo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93CEB188262CCD4B0085EAE1 /* MonteCarlo.cpp */; };
+		93CEB18C262CCD4B0085EAE1 /* Minimax.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93CEB189262CCD4B0085EAE1 /* Minimax.cpp */; };
+		93CEB18D262CCD4B0085EAE1 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93CEB18A262CCD4B0085EAE1 /* GameState.cpp */; };
+		93CEB193262CDF3C0085EAE1 /* MCTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CEB192262CDF3C0085EAE1 /* MCTS.swift */; };
+		93CEB196262D18D20085EAE1 /* model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 93CEB195262D18D20085EAE1 /* model.tflite */; };
 		93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */; };
 		93E9BE162625313300DB99B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9BE152625313300DB99B1 /* ContentView.swift */; };
 		93E9BE182625313400DB99B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93E9BE172625313400DB99B1 /* Assets.xcassets */; };
@@ -31,14 +34,19 @@
 		9360475D26272EE400DC8922 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		93785E4A2627D4E8004FB1F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		937B88A82628721A007F030C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		937B88B22628767D007F030C /* GameState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
-		937B88B32628767D007F030C /* Minimax.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Minimax.hpp; sourceTree = "<group>"; };
-		937B88B42628767D007F030C /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
-		937B88B52628767D007F030C /* Minimax.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Minimax.cpp; sourceTree = "<group>"; };
 		937B88BB2628D5B8007F030C /* MinimaxWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MinimaxWrapper.hpp; sourceTree = "<group>"; };
 		937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; path = MinimaxWrapper.cpp; sourceTree = "<group>"; };
 		937B88C22628D7AD007F030C /* UltimateTicTacToe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UltimateTicTacToe-Bridging-Header.h"; sourceTree = "<group>"; };
 		93CEB180262CBB380085EAE1 /* ModelDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ModelDataHandler.swift; path = UltimateTicTacToe/ModelDataHandler.swift; sourceTree = SOURCE_ROOT; };
+		93CEB184262CCD3A0085EAE1 /* Minimax.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Minimax.hpp; sourceTree = "<group>"; };
+		93CEB185262CCD3A0085EAE1 /* GameState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameState.hpp; sourceTree = "<group>"; };
+		93CEB186262CCD3A0085EAE1 /* MonteCarlo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MonteCarlo.hpp; sourceTree = "<group>"; };
+		93CEB187262CCD3A0085EAE1 /* dirichlet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dirichlet.hpp; sourceTree = "<group>"; };
+		93CEB188262CCD4B0085EAE1 /* MonteCarlo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MonteCarlo.cpp; sourceTree = "<group>"; };
+		93CEB189262CCD4B0085EAE1 /* Minimax.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Minimax.cpp; sourceTree = "<group>"; };
+		93CEB18A262CCD4B0085EAE1 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		93CEB192262CDF3C0085EAE1 /* MCTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCTS.swift; sourceTree = "<group>"; };
+		93CEB195262D18D20085EAE1 /* model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = model.tflite; sourceTree = "<group>"; };
 		93E9BE102625313300DB99B1 /* UltimateTicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateTicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93E9BE132625313300DB99B1 /* UltimateTicTacToeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltimateTicTacToeApp.swift; sourceTree = "<group>"; };
 		93E9BE152625313300DB99B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +92,7 @@
 			children = (
 				93CEB180262CBB380085EAE1 /* ModelDataHandler.swift */,
 				937B88A82628721A007F030C /* Game.swift */,
+				93CEB192262CDF3C0085EAE1 /* MCTS.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -91,10 +100,13 @@
 		937B88AC26287502007F030C /* Cpp */ = {
 			isa = PBXGroup;
 			children = (
-				937B88B42628767D007F030C /* GameState.cpp */,
-				937B88B22628767D007F030C /* GameState.hpp */,
-				937B88B52628767D007F030C /* Minimax.cpp */,
-				937B88B32628767D007F030C /* Minimax.hpp */,
+				93CEB187262CCD3A0085EAE1 /* dirichlet.hpp */,
+				93CEB185262CCD3A0085EAE1 /* GameState.hpp */,
+				93CEB184262CCD3A0085EAE1 /* Minimax.hpp */,
+				93CEB186262CCD3A0085EAE1 /* MonteCarlo.hpp */,
+				93CEB18A262CCD4B0085EAE1 /* GameState.cpp */,
+				93CEB189262CCD4B0085EAE1 /* Minimax.cpp */,
+				93CEB188262CCD4B0085EAE1 /* MonteCarlo.cpp */,
 				937B88BB2628D5B8007F030C /* MinimaxWrapper.hpp */,
 				937B88BC2628D5B8007F030C /* MinimaxWrapper.cpp */,
 				937B88C22628D7AD007F030C /* UltimateTicTacToe-Bridging-Header.h */,
@@ -123,6 +135,7 @@
 		93E9BE122625313300DB99B1 /* UltimateTicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				93CEB195262D18D20085EAE1 /* model.tflite */,
 				937B88AC26287502007F030C /* Cpp */,
 				937B88A726286F47007F030C /* Models */,
 				936047592627256700DC8922 /* Views */,
@@ -212,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93E9BE1B2625313400DB99B1 /* Preview Assets.xcassets in Resources */,
+				93CEB196262D18D20085EAE1 /* model.tflite in Resources */,
 				93E9BE182625313400DB99B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,16 +263,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9360475B2627257500DC8922 /* MainMenuView.swift in Sources */,
+				93CEB18D262CCD4B0085EAE1 /* GameState.cpp in Sources */,
 				93CEB181262CBB380085EAE1 /* ModelDataHandler.swift in Sources */,
 				930CBE3F26273AF40046086D /* SquareView.swift in Sources */,
 				937B88A92628721A007F030C /* Game.swift in Sources */,
 				93E9BE162625313300DB99B1 /* ContentView.swift in Sources */,
 				93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */,
 				937B88BD2628D5B8007F030C /* MinimaxWrapper.cpp in Sources */,
+				93CEB18C262CCD4B0085EAE1 /* Minimax.cpp in Sources */,
 				9360475E26272EE400DC8922 /* GameView.swift in Sources */,
 				93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */,
-				937B88B72628767D007F030C /* Minimax.cpp in Sources */,
-				937B88B62628767D007F030C /* GameState.cpp in Sources */,
+				93CEB193262CDF3C0085EAE1 /* MCTS.swift in Sources */,
+				93CEB18B262CCD4B0085EAE1 /* MonteCarlo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +408,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = S8CK6858AC;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = UltimateTicTacToe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -418,6 +435,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"UltimateTicTacToe/Preview Content\"";
 				DEVELOPMENT_TEAM = S8CK6858AC;
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = UltimateTicTacToe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

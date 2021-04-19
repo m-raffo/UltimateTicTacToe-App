@@ -392,19 +392,18 @@ using namespace std;
         }
     }
 
-    /**
-     * Gets the status of the given miniboard.
-     * Important: GameState.updateMiniboardStatus() MUST be called before this function to ensure correct results.
-     *
-     * 0: Ongoing game
-     * 1: X wins
-     * 2: O wins
-     * 3: Tie
-     * @param boardLocation the board to check from 0 to 8
-     * @return the status
-     */
     int GameState::getBoardStatus(int boardLocation) {
-
+        /**
+         * Gets the status of the given miniboard.
+         * Important: GameState.updateMiniboardStatus() MUST be called before this function to ensure correct results.
+         * 
+         * 0: Ongoing game
+         * 1: X wins
+         * 2: O wins
+         * 3: Tie
+         * @param boardLocation the board to check from 0 to 8
+         * @return the status
+         */
 
         // Tie
         if (board[boardLocation][0] && board[boardLocation][1]) {
@@ -496,7 +495,7 @@ using namespace std;
                 return true;
             } 
         } else {
-            if (getPosition(board, piece) == 0 && getBoardStatus(board) == 0) {
+            if (getPosition(board, piece) == 0) {
                 return true;
             }
         }
@@ -874,29 +873,18 @@ using namespace std;
 
         for (int miniboardIndex = 0; miniboardIndex < 9; miniboardIndex++) {
 
-            for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
 
-                int spotStatus = getPosition(miniboardIndex, spotIndex);
-                
-
-                if (spotStatus == toMove) {
-                    canonical[miniboardIndex * 22 + spotIndex * 2] = 1;
-                }
-
-                // If the spot belongs to the other player
-                else if (spotStatus == 2 / toMove) {
-                    canonical[miniboardIndex * 22 + spotIndex * 2 + 1] = 1;
-                }
-
-                // Else neither owns it, zero is default
-
-            }
 
             int boardStatus = getBoardStatus(miniboardIndex);
 
             // Mark if the board is won/lost/tied
             if (boardStatus == toMove) {
                 canonical[miniboardIndex * 22 + 18] = 1;
+
+                // Mark every spot
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+                    canonical[miniboardIndex * 22 + spotIndex * 2] = 1;
+                }
             }
 
             else if (boardStatus == 3) {
@@ -905,6 +893,31 @@ using namespace std;
 
             else if (boardStatus == 2 / toMove) {
                 canonical[miniboardIndex * 22 + 19] = 1;
+
+                // Mark every spot
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+                    canonical[miniboardIndex * 22 + spotIndex * 2 + 1] = 1;
+                }
+            }
+
+            else {
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+
+                    int spotStatus = getPosition(miniboardIndex, spotIndex);
+                    
+
+                    if (spotStatus == toMove) {
+                        canonical[miniboardIndex * 22 + spotIndex * 2] = 1;
+                    }
+
+                    // If the spot belongs to the other player
+                    else if (spotStatus == 2 / toMove) {
+                        canonical[miniboardIndex * 22 + spotIndex * 2 + 1] = 1;
+                    }
+
+                    // Else neither owns it, zero is default
+
+                }
             }
 
 
@@ -919,6 +932,77 @@ using namespace std;
 
         for (int i = 0; i < 199; i++) {
             result.push_back(canonical[i]);
+        }
+
+        return result;
+    }
+
+    nnInput GameState::getNNInput() {
+        nnInput result;
+
+        int toMove = getToMove();
+        int requiredBoard = getRequiredBoard();
+
+        for (int miniboardIndex = 0; miniboardIndex < 9; miniboardIndex++) {
+
+
+
+            int boardStatus = getBoardStatus(miniboardIndex);
+
+            // Mark if the board is won/lost/tied
+            if (boardStatus == toMove) {
+                result.board[miniboardIndex * 22 + 18] = 1;
+
+                // Mark every spot
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+                    result.board[miniboardIndex * 22 + spotIndex * 2] = 1;
+                }
+            }
+
+            else if (boardStatus == 3) {
+                result.board[miniboardIndex * 22 + 20] = 1;
+            }
+
+            else if (boardStatus == 2 / toMove) {
+                result.board[miniboardIndex * 22 + 19] = 1;
+
+                // Mark every spot
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+                    result.board[miniboardIndex * 22 + spotIndex * 2 + 1] = 1;
+                }
+            }
+
+            else {
+                for (int spotIndex = 0; spotIndex < 9; spotIndex++) {
+
+                    int spotStatus = getPosition(miniboardIndex, spotIndex);
+                    
+
+                    if (spotStatus == toMove) {
+                        result.board[miniboardIndex * 22 + spotIndex * 2] = 1;
+                    }
+
+                    // If the spot belongs to the other player
+                    else if (spotStatus == 2 / toMove) {
+                        result.board[miniboardIndex * 22 + spotIndex * 2 + 1] = 1;
+                    }
+
+                    // Else neither owns it, zero is default
+
+                }
+            }
+
+
+            // Mark if this board is legal to move in
+            if (boardStatus == 0 && (requiredBoard == miniboardIndex || requiredBoard == -1)) {
+                result.board[miniboardIndex * 22 + 21] = 1;
+            }
+
+        }
+
+        vector<int> validMoves = getAllPossibleMovesVector();
+        for (int i = 0; i < 81; i++) {
+            result.valid[i] = validMoves[i];
         }
 
         return result;

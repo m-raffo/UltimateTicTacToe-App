@@ -44,8 +44,11 @@ struct GameView: View {
     /// The amount of padding from the edge of the main board to the miniboard
     var p: Int = 10
     
+    /// The current state of the game and it's visual representation
     @State var game:Game = Game();
     
+    /// The Monte Carlo Search Tree behind the AI agent.
+    @State var mcts:MCTS = MCTS();
             
     var body: some View {
         ZStack {

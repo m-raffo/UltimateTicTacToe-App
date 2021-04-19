@@ -29,9 +29,10 @@ struct SquareView: View {
                 
                 if IsValidMove(game.game, b, p) == 1 {
                     game.aiMove = true
-                    // Make the move
-                    Move(game.game, b, p)
+                    game.move(board: Int(b), piece: Int(p))
+                    
                     game.board[index] = Int(GetPosition(game.game, b, p))
+                    print(game.board[index])
                     game.requiredBoard = Int(GetRequiredBoard(game.game))
                     
                     
@@ -44,10 +45,16 @@ struct SquareView: View {
                     
                     // Start the computer thinking about its response
                     DispatchQueue.global(qos: .userInitiated).async {
-                        let compMove = MinimaxSearchTimeMove(game.game, 6, 0)
+                        game.mcts.PerformIterations(num: 100)
                         
-                        Move(game.game, compMove.board, compMove.piece);
-                        game.board[Int(compMove.board * 9 + compMove.piece)] = Int(GetPosition(game.game, compMove.board, compMove.piece))
+                        let compAction = game.mcts.GetBestMove()
+                        
+                        let b: Int = compAction / 9
+                        let p: Int = compAction % 9
+                        
+                        game.move(board: b, piece: p)
+                        
+                        game.board[compAction] = Int(GetPosition(game.game, Int32(b), Int32(p)))
                         game.aiMove = false
                         game.requiredBoard = Int(GetRequiredBoard(game.game))
                         

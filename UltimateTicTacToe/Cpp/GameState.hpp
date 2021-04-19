@@ -5,7 +5,18 @@ using namespace std;
 #include <vector>
 #include <iostream>
 
-const std::bitset<20> winningPosX[] = {
+
+struct nnInput {
+    float board[199] = {};
+    float valid[81] = {};
+};
+
+struct nnOutput {
+    float policy[81] = {};
+    float value = 0;
+};
+
+const bitset<20> winningPosX[] = {
     0b00000000000001010100,
     0b00000001010100000000,
     0b01010100000000000000,
@@ -16,7 +27,7 @@ const std::bitset<20> winningPosX[] = {
     0b00000100010001000000,
 };
 
-const std::bitset<20> winningPosO[] = {
+const bitset<20> winningPosO[] = {
     0b00000000000010101000,
     0b00000010101000000000,
     0b10101000000000000000,
@@ -31,10 +42,10 @@ struct boardCoords {
     int board, piece;
 };
 
-int checkMiniboardResultsWithTie(std::bitset<20> miniboard);
-int checkMiniboardResults(std::bitset<20> miniboard);
+int checkMiniboardResultsWithTie(bitset<20> miniboard);
+int checkMiniboardResults(bitset<20> miniboard);
 
-int getMiniboardResults(std::bitset<20> miniboard);
+int getMiniboardResults(bitset<20> miniboard);
 
 
 class GameState {
@@ -53,7 +64,7 @@ class GameState {
 
     bool isValidMove(int board, int piece);
 
-    std::bitset<20> board[9];
+    bitset<20> board[9];
 
     GameState();
 
@@ -78,19 +89,21 @@ class GameState {
 
     GameState getCopy();
 
-    std::vector<GameState> allPossibleMoves();
+    vector<GameState> allPossibleMoves();
 
     boardCoords absoluteIndexToBoardAndPiece(int i);
 
     void displayGame();
-    std::string gameToString();
+    string gameToString();
 
-    std::vector<int> getCanonicalBoard();
-    std::vector<int> getBoardBitset();
+    vector<int> getCanonicalBoard();
+    vector<int> getBoardBitset();
 
     vector<int> getAllPossibleMovesVector();
 
     bitset<199> getCanonicalBoardBitset();
+
+    nnInput getNNInput();
     
 };
 

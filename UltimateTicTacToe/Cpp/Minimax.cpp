@@ -506,8 +506,6 @@ GameState minimaxSearchTime(GameState position, int time, bool playAsX, constant
     while (true) {
         depth++;
         std::sort (childEvals.begin(), childEvals.end(), compareEval);
-        
-        cout << "Starting depth" << depth << "\n";
 
         bestFullySearchedMove = childEvals.at(0).n;
 
@@ -518,7 +516,6 @@ GameState minimaxSearchTime(GameState position, int time, bool playAsX, constant
 
             // If time has expired, return the best fully searched move
             if (!result.complete) {
-                cout << "EVAL: " << evaluate(bestFullySearchedMove.board, c) << '\n';
                 return bestFullySearchedMove.board;
             }
 

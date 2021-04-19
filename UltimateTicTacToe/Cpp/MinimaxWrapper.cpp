@@ -8,13 +8,58 @@
 #include "MinimaxWrapper.hpp"
 
 #include "Minimax.hpp"
+#include "MonteCarlo.hpp"
 
-CGameState * CreateCppClass(){
+CGameState * CreateGameState(){
     return new GameState();
 }
 
-void ReleaseCppClass(CGameState * c){
+CMCTS * CreateMCTS(int cpuct, double dirichlet) {
+    return new MCTS(cpuct, dirichlet, 0);
+};
+
+void StartNewSearch(CMCTS * mcts, CGameState * position) {
+    mcts->startNewSearch(*position);
+}
+
+
+CnnInput SearchPreNN(CMCTS * mcts) {
+    CnnInput result;
+    nnInput resultCpp = mcts->searchPreNNforTfLite();
+    
+    memcpy(result.board, resultCpp.board, sizeof resultCpp.board);
+    memcpy(result.valid, resultCpp.valid, sizeof resultCpp.valid);
+    
+    return result;
+}
+
+void SearchPostNN(CMCTS * mcts, CnnOutput nnResult) {
+    nnOutput nnCpp;
+    
+    memcpy(nnCpp.policy, nnResult.policy, sizeof nnResult.policy);
+    nnCpp.value = nnResult.value;
+    
+    mcts->searchPostNNTfLite(nnCpp);
+}
+
+int GetBestAction(CMCTS * mcts) {
+    return mcts->maxActionProb();
+}
+
+void TakeActionMCTS(CMCTS * mcts, int action) {
+    mcts->takeAction(action);
+}
+
+void ReleaseGameState(CGameState * c){
     delete c;
+}
+
+void ReleaseMCTS(CMCTS * mcts) {
+    delete mcts;
+}
+
+int IsEvalNeeded(CMCTS * mcts) {
+    return (int)mcts->evaluationNeeded;
 }
 
 int GetPosition(CGameState * c, int board, int piece){
@@ -25,7 +70,7 @@ void SetPosition(CGameState * c, int boardLocation, int pieceLocation, int piece
     c->setPosition(boardLocation, pieceLocation, piece);
 }
 
-void Move(CGameState * c, int boardLocation, int pieceLocation) {
+void GameStateMove(CGameState * c, int boardLocation, int pieceLocation) {
     c->move(boardLocation, pieceLocation);
 }
 

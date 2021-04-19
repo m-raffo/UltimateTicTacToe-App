@@ -45,7 +45,20 @@ struct MainMenuView: View {
                 
                 Button(action:{
                     
-                    print("Test here")
+                    let game = CreateGameState();
+                    let mcts = CreateMCTS(1, 1);
+                    
+                    GameStateMove(game, 0, 1);
+                    GameStateMove(game, 1, 7);
+                    
+                    StartNewSearch(mcts, game);
+                    
+                    let nnInput = SearchPreNN(mcts);
+                    
+                    print(nnInput.board);
+                    
+                    ReleaseMCTS(mcts);
+                    ReleaseGameState(game);
                                         
                 }) {
                     Text("Player\nvs\nPlayer")

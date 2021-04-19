@@ -7,8 +7,7 @@ using namespace std;
 #include <iostream>
 #include <unordered_map>
 
-
-const int c1 = 1, c2 = 1, cw = 10, cl = 0, ct = 0;
+const int c1 = 2, c2 = 1, cw = 10, cl = 0, ct = 0;
 
 struct constants {
     int c1 = 2, c2 = 1, cw = 10, cl = 0, ct = 0;
