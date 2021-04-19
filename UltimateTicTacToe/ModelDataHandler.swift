@@ -45,11 +45,6 @@ class ModelDataHandler {
             
             policyOutput = try interpreter.output(at: 0)
             valueOutput = try interpreter.output(at: 1)
-            print("data")
-            
-            
-//            print(value.pointee)
-            
             
         } catch let error {
             print("Failed to invoke the interpreter with error: \(error.localizedDescription)")
@@ -69,6 +64,9 @@ class ModelDataHandler {
         
         results.value = value.pointee
         memcpy(&results.policy, policy, 81 * MemoryLayout<Float32>.size)
+        
+        value.deallocate()
+        policy.deallocate()
         
 //        let resultsPolicy = UnsafeMutablePointer<Float32>.allocate(capacity: 81)
 //        let resultsValue = UnsafeMutablePointer<Float32>.allocate(capacity: 1)

@@ -12,6 +12,8 @@ struct Game {
     /// Array of all the spaces on the board
     var board: [Int] = [Int](repeating: 0, count: 81)
     
+    var boardStates: [Int] = [Int](repeating: 0, count: 9)
+    
     /// Pointer to the GameState object
     var game: OpaquePointer? = CreateGameState()
     
@@ -25,9 +27,11 @@ struct Game {
 
     var bgColors: [Color] = [Color](repeating: Color.white, count: 9)
     
-    func move(board: Int, piece: Int) {
+    mutating func move(board: Int, piece: Int) {
         GameStateMove(game, Int32(board), Int32(piece))
         mcts.TakeAction(action: board * 9 + piece)
+        
+        self.boardStates[board] = Int(GetBoardStatus(game, Int32(board)))
     }
     
 }

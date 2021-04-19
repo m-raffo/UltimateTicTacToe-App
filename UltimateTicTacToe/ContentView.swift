@@ -12,11 +12,13 @@ struct ContentView: View {
     /// Set to true when the GameView is showing
     @State private var showingGame = false
     
+    @State var mctsSims: Double = 500
+    
     var body: some View {
         if showingGame {
-            GameView()
+            GameView(mctsSims: $mctsSims)
         } else {
-            MainMenuView(showingGame: $showingGame)
+            MainMenuView(showingGame: $showingGame, mctsSims: $mctsSims)
         }
     }
 }

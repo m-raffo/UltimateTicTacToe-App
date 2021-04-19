@@ -104,3 +104,8 @@ CboardCoords MinimaxSearchTimeMove(CGameState * position, int time, int playAsX)
     return result;
 
 }
+
+int GetBoardStatus(CGameState * c, int board) {
+    return c->getBoardStatus(board);
+};
+

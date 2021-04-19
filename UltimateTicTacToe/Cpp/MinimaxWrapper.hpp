@@ -72,6 +72,8 @@ void TakeActionMCTS(CMCTS * mcts, int action);
  */
 int IsEvalNeeded(CMCTS * mcts);
 
+int GetBoardStatus(CGameState * c, int board);
+
 void ReleaseGameState(CGameState * c);
 void ReleaseMCTS(CMCTS * mcts);
 

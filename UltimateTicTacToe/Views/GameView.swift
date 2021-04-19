@@ -49,10 +49,16 @@ struct GameView: View {
     
     /// The Monte Carlo Search Tree behind the AI agent.
     @State var mcts:MCTS = MCTS();
+    
+    @Binding var mctsSims: Double
             
     var body: some View {
         ZStack {
-            BoardView(p: p, po: po, game: $game)
+            let textStatus = ["", "X", "O", "T"]
+            let textColor = [Color.white, Color.red, Color.blue, Color.black]
+            
+            BoardView(p: p, po: po, game: $game, mctsSims: $mctsSims)
+            
             
             GeometryReader { geometry in
                 // Amount of space above the board
@@ -90,6 +96,7 @@ struct GameView: View {
                 ForEach(0..<3) { boardX in
                     ForEach(0..<3) { boardY in
                         // Miniboard
+                        if game.boardStates[boardY * 3 + boardX] == 0 {
                         Path { path in
                             let boardPixelX = po + p + h * boardX
                             let boardPixelY = po + p + h * boardY + offsetAmountY
@@ -112,8 +119,43 @@ struct GameView: View {
 
                         }
                         .stroke(Color.black, lineWidth: CGFloat(miniWidth))
+                        }
                     }
                 }
+                
+                
+            }
+            
+            GeometryReader { geometry in
+                // Amount of space above the board
+                let offsetAmountY: Int = (Int(geometry.size.height) - Int(geometry.size.width)) / 2
+
+                VStack {
+
+                // Width of a miniboard
+                let h: Int = (Int(geometry.size.width) - 2 * po) / 3
+
+                // Width of space
+                let hi: Int = (h - 2 * p) / 3
+
+                VStack {
+                ForEach(0..<3) { boardX in
+                    HStack {
+                    ForEach(0..<3) { boardY in
+                        Text(textStatus[game.boardStates[boardY + boardX * 3]])
+                            .fontWeight(.bold)
+                            .font(.system(size:CGFloat(h)))
+                            .frame(width: CGFloat(h - p / 2), height: CGFloat(h), alignment: .center)
+                            .scaledToFit()
+                            .foregroundColor(textColor[game.boardStates[boardY + boardX * 3]])
+                            
+                    }
+                    }
+
+                }
+                }.padding(CGFloat(po))
+
+                }.offset(y: CGFloat(offsetAmountY))
                 
                 
             }
@@ -123,6 +165,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(mctsSims: .constant(500))
     }
 }

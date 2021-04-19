@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainMenuView: View {
     @Binding var showingGame: Bool
-    
+    @Binding var mctsSims: Double
+        
     let model: ModelDataHandler? = ModelDataHandler()
     
     var body: some View {
@@ -73,6 +74,10 @@ struct MainMenuView: View {
                             )
                 }
                 Spacer()
+                
+                Slider(value: $mctsSims, in: 200...10000, step:100)
+                
+                Spacer()
 
             }
 
@@ -84,6 +89,6 @@ struct MainMenuView: View {
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView(showingGame: .constant(true))
+        MainMenuView(showingGame: .constant(true), mctsSims: .constant(500))
     }
 }
