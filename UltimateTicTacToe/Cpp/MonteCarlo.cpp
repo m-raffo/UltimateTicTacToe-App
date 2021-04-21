@@ -86,15 +86,14 @@ vector<int> MCTS::searchPreNN() {
     // Select a node
     currentNode = &rootNode;
     Node *bestAction;
-    Node *child;
 
     // currentNode->addChildren();
     currentNode->n++;
 
     float bestUCB = -1 * numeric_limits<float>::max();
-    float u, q, v;
+    float u;
 
-    int status, i;
+    int status;
 
     vector<int> empty;
 
@@ -103,6 +102,8 @@ vector<int> MCTS::searchPreNN() {
 
         // Pick the action with the highest upper confidence bound
         bestUCB = -1 * numeric_limits<float>::max();
+        // Set default best action
+        bestAction = &currentNode->children[0];
         for (Node &child : currentNode->children) {
             if (child.n > 0) {
                 u = (child.w / child.n) + cpuct * child.p * (sqrt(currentNode->n) / (1 + child.n));
@@ -153,18 +154,16 @@ vector<int> MCTS::searchPreNN() {
 }
 
 nnInput MCTS::searchPreNNforTfLite() {
-        // Select a node
+    // Select a node
     currentNode = &rootNode;
-    Node *bestAction;
-    Node *child;
+    Node *bestAction = &currentNode->children[0];
 
-    // currentNode->addChildren();
     currentNode->n++;
 
     float bestUCB = -1 * numeric_limits<float>::max();
-    float u, q, v;
+    float u;
 
-    int status, i;
+    int status;
 
 
     // Search until an unexplored node is found
@@ -232,10 +231,9 @@ vector<int> MCTS::getAllPossibleMovesVector() {
 }
 
 void MCTS::searchPostNN(vector<float> policy, float v) {
-    int validAction, index, i;
+    int validAction;
     float totalValidMoves = 0;
     int numValidMoves = 0;
-    Node *child;
 
     // Save policy value
     // Normalize policy values based on which moves are valid
@@ -289,7 +287,6 @@ vector<float> MCTS::getActionProb() {
     int maxActionIndex = 0;
     
     for (Node &action : rootNode.children) {
-        int actionIndex = action.board.previousMove.board * 9 + action.board.previousMove.piece;
         numValidActions++;
         totalActionValue += action.n;
     }
@@ -315,7 +312,7 @@ vector<float> MCTS::getActionProb() {
 }
 
 int MCTS::maxActionProb() {
-    int bestAction;
+    int bestAction = -1;
     float bestValue = 0;
 
     for (Node &action : rootNode.children) {
@@ -323,6 +320,11 @@ int MCTS::maxActionProb() {
             bestValue = action.n;
             bestAction = action.board.previousMove.board * 9 + action.board.previousMove.piece;
         }
+    }
+    
+    if (bestAction == -1) {
+        cout << "Warning :: Max action prob found no valid actions!";
+        return -1;
     }
 
     return bestAction;

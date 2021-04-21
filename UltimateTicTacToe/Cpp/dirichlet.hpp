@@ -29,7 +29,7 @@ dirichlet_distribution<RNG>::dirichlet_distribution(const std::vector<double>& a
 
 template <class RNG>
 dirichlet_distribution<RNG>::dirichlet_distribution(const double& alpha_value, const int& dim) {
-	vector<double> alpha (dim, alpha_value);
+    std::vector<double> alpha (dim, alpha_value);
 	set_params(alpha);
 }
 
@@ -46,7 +46,7 @@ void dirichlet_distribution<RNG>::set_params(const std::vector<double>& new_para
 
 template <class RNG>
 void dirichlet_distribution<RNG>::set_params(const double& alpha_value, const int& dim) {
-	vector<double> alpha (dim, alpha_value);
+    std::vector<double> alpha (dim, alpha_value);
 	set_params(alpha);
 }
 

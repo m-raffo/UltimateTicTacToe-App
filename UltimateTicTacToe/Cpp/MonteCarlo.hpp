@@ -1,5 +1,4 @@
 #pragma once
-using namespace std;
 
 #include <bitset>
 #include <vector>
@@ -11,22 +10,22 @@ using namespace std;
 
 
 struct trainingExample {
-    bitset<199> canonicalBoard;
+    std::bitset<199> canonicalBoard;
     float result;
     float pi[81];
     float q;
 
-    vector<int> validMoves;
+    std::vector<int> validMoves;
 };
 
 struct trainingExampleVector {
-    vector<int> canonicalBoard;
+    std::vector<int> canonicalBoard;
     float result;
     float q;
-    vector<float> pi;
+    std::vector<float> pi;
     int timesSeen = 1;
 
-    vector<int> validMoves;
+    std::vector<int> validMoves;
 };
 
 
@@ -36,10 +35,10 @@ class MCTS {
     double dirichlet_a = 0.8;
     float percent_q = 0.5;
 
-    vector<trainingExample> trainingPositions;
+    std::vector<trainingExample> trainingPositions;
 
-    mt19937 gen;
-    dirichlet_distribution<mt19937> dirichlet;
+    std::mt19937 gen;
+    dirichlet_distribution<std::mt19937> dirichlet;
 
     public:
     Node rootNode;
@@ -56,43 +55,43 @@ class MCTS {
 
         void backpropagate(Node *finalNode, float result);
 
-        vector<int> searchPreNN();
-        vector<int> getAllPossibleMovesVector();
-        void searchPostNN(vector<float> policy, float v);
+    std::vector<int> searchPreNN();
+    std::vector<int> getAllPossibleMovesVector();
+        void searchPostNN(std::vector<float> policy, float v);
 
         nnInput searchPreNNforTfLite();
         void searchPostNNTfLite(nnOutput result);
 
         bool evaluationNeeded;
 
-        vector<float> getActionProb();
-        vector<float> getQProb();
-        vector<float> getPProb();
-        vector<float> getVProb();
+    std::vector<float> getActionProb();
+    std::vector<float> getQProb();
+    std::vector<float> getPProb();
+    std::vector<float> getVProb();
 
         int maxActionProb();
 
         void takeAction(int actionIndex);
         int getStatus();
         void displayGame();
-        string gameToString();
+    std::string gameToString();
 
-        void saveTrainingExample(vector<float> pi, float q);
-        vector<trainingExample> getTrainingExamples(int result);
-        vector<trainingExampleVector> getTrainingExamplesVector(int result);
+        void saveTrainingExample(std::vector<float> pi, float q);
+    std::vector<trainingExample> getTrainingExamples(int result);
+    std::vector<trainingExampleVector> getTrainingExamplesVector(int result);
         void purgeTrainingExamples();
 
-        vector<double> dir(double a, int dim);
+    std::vector<double> dir(double a, int dim);
 
 };
 
-vector<vector<int>> getSymmetriesBoard(vector<int> board);
-vector<vector<float>> getSymmetriesPi(vector<float> pi);
-vector<vector<int>> getSymmetriesMoves(vector<int> moves);
-vector<trainingExampleVector> getSymmetries(trainingExampleVector position);
+std::vector<std::vector<int>> getSymmetriesBoard(std::vector<int> board);
+std::vector<std::vector<float>> getSymmetriesPi(std::vector<float> pi);
+std::vector<std::vector<int>> getSymmetriesMoves(std::vector<int> moves);
+std::vector<trainingExampleVector> getSymmetries(trainingExampleVector position);
 
 
-int findCanonicalRotation(vector<int> board);
+int findCanonicalRotation(std::vector<int> board);
 
-vector<int> getCanonicalBoardRotation(vector<int> board);
+std::vector<int> getCanonicalBoardRotation(std::vector<int> board);
 trainingExampleVector getCanonicalTrainingExampleRotation(trainingExampleVector ex);

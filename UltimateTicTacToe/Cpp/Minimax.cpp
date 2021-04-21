@@ -10,12 +10,12 @@ using namespace std;
 
 unordered_map<bitset<20>, dualEvals> evaluationMap;
 
-
+/**
+ * Evaluates the given position.
+ * @return The evaluation, Positive indicates advantage to X, negative indicates advantage to O
+ */
 float evaluate(GameState board, constants c) {
-    /**
-     * Evaluates the given position.
-     * @return The evaluation, Positive indicates advantage to X, negative indicates advantage to O
-     */
+
     float miniboardEvalsX[9], miniboardEvalsO[9];
     bitset<20> (&position)[9] = board.board;
 
@@ -65,24 +65,23 @@ float evaluate(GameState board, constants c) {
     return finalEval;
 }
 
-
+/**
+ * Evaluates a single miniboard for one side.
+ *
+ * eval = (c1 * (w ^ 0.5)) + c2 * r)
+ *
+ * Where:
+ * c1, c2 - constants
+ * w - spaces that are winning if taken
+ * r - rows with only one spot taken (ie win in two moves)
+ *
+ * cw - the value of an already won board
+ * cl - the value of a lost board (should be <=0)
+ * ct - the value of a tied board
+ *
+ * @param side 1 to evaluate for X; 2 to evaluate for O
+ */
 float miniboardEvalOneSide(bitset<20> miniboard, int side, constants c) {
-    /**
-     * Evaluates a single miniboard for one side.
-     * 
-     * eval = (c1 * (w ^ 0.5)) + c2 * r)
-     * 
-     * Where:
-     * c1, c2 - constants
-     * w - spaces that are winning if taken
-     * r - rows with only one spot taken (ie win in two moves)
-     * 
-     * cw - the value of an already won board
-     * cl - the value of a lost board (should be <=0)
-     * ct - the value of a tied board
-     * 
-     * @param side 1 to evaluate for X; 2 to evaluate for O
-     */
 
     int r = 0, w = 0;
 
@@ -147,10 +146,11 @@ float miniboardEvalOneSide(bitset<20> miniboard, int side, constants c) {
     return c.c1 * sqrt(w) + c.c2 * r;
 }
 
+/**
+ * Calculate the significances of each miniboard based on the evaluations given.
+ */
 significances calcSignificances(bitset<20> fullBoard[9], float evaluationsX[9], float evaluationsY[9]) {
-    /**
-     * Calculate the significances of each miniboard based on the evaluations given.
-     */
+
     significances result;
 
     int result1, result2;
@@ -268,11 +268,12 @@ float minimax(Node (&node), int depth, float alpha, float beta, bool maximizingP
     return minimaxTimeLimited(node, depth, alpha, beta, maximizingPlayer, 0, c).result;
 };
 
+/**
+ * Calculates the evaluation of the given board to the given depth.
+ * Note that updateMiniboardStatus() or updateSignleMiniboardStatus() must be called before this function.
+ */
 timeLimitedSearchResult minimaxTimeLimited(Node (&node), int depth, float alpha, float beta, bool maximizingPlayer, int time, constants c) {
-    /**
-     * Calculates the evaluation of the given board to the given depth.
-     * Note that updateMiniboardStatus() or updateSignleMiniboardStatus() must be called before this function.
-     */
+
 
     timeLimitedSearchResult result;
 
@@ -285,8 +286,6 @@ timeLimitedSearchResult minimaxTimeLimited(Node (&node), int depth, float alpha,
     }
 
     float bestEval, newEval;
-
-    const float inf = numeric_limits<float>::infinity();
 
 
     // When a forced loss position is evaluated before a forced win position,
@@ -469,14 +468,13 @@ GameState minimaxSearchTime(GameState position, int time, bool playAsX)  {
 
 GameState minimaxSearchTime(GameState position, int time, bool playAsX, constants c) {
 
-    int endTime = std::time(nullptr) + time;
+    int endTime = (int)std::time(nullptr) + time;
 
     Node start = Node(position, 0);
 
     start.addChildren();
 
     // Keep track of the children and their evaluations
-    int numChildren = start.children.size();
     int depth = 2;
     vector<nodeAndEval> childEvals;
     
