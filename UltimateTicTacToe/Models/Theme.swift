@@ -15,5 +15,4 @@ struct Theme {
     var xBackground = Color(red: 1, green: 87/255, blue: 87/255, opacity: 0.5)
     
     var oBackground = Color(red: 36/255, green: 160/255, blue: 1, opacity: 0.5)
-    
 }

@@ -37,9 +37,9 @@ class ModelDataHandler {
         
         do {
             try interpreter.copy(board, toInputAt: 0)
-
+            
             try interpreter.copy(valid, toInputAt: 1)
-
+            
             
             try interpreter.invoke()
             
@@ -58,7 +58,7 @@ class ModelDataHandler {
         
         let valueBuffer = UnsafeMutableBufferPointer<Float32>(start: value, count: 1)
         let policyBuffer = UnsafeMutableBufferPointer<Float32>(start: policy, count: 81)
-
+        
         let _ = valueOutput.data.copyBytes(to: valueBuffer)
         let _ = policyOutput.data.copyBytes(to: policyBuffer)
         
@@ -68,51 +68,6 @@ class ModelDataHandler {
         value.deallocate()
         policy.deallocate()
         
-//        let resultsPolicy = UnsafeMutablePointer<Float32>.allocate(capacity: 81)
-//        let resultsValue = UnsafeMutablePointer<Float32>.allocate(capacity: 1)
-//
-//        let policyBuffer = UnsafeMutableBufferPointer(start: resultsPolicy, count: 81)
-//        let resultsBuffer = UnsafeMutableBufferPointer(start: resultsValue, count: 1)
-//
-//        let policyResultsQuantized = [UInt8](policyOutput.data)
-//        let valueResultsQuantized = [UInt8](valueOutput.data)
-//
-//        let resultsUnquantized: [Float]
-//
-//        var results:CnnOutput = CnnOutput()
-//
-//        if let policyQuantization = policyOutput.quantizationParameters {
-//            resultsUnquantized = policyResultsQuantized.map {
-//                policyQuantization.scale * Float(Int($0) - policyQuantization.zeroPoint)
-//            }
-//
-//            resultsPolicy.initialize(from: resultsUnquantized, count: 81)
-//
-//
-//        }
-//
-//        else {
-////            resultsUnquantized = [Float](policyOutput.data
-//        }
-//
-//        if let valueQuantization = valueOutput.quantizationParameters {
-//            let valueUnquantized = valueResultsQuantized.map {
-//                valueQuantization.scale * Float(Int($0) - valueQuantization.zeroPoint)
-//            }
-//
-//            resultsValue.initialize(from: valueUnquantized, count: 1)
-//
-//
-//
-//        } else {
-//            policyOutput.data.copyBytes(to: resultsBuffer)
-//        }
-//
-//        memcpy(&results.policy, resultsPolicy, MemoryLayout<Float32>.size * 81)
-//
-//        memcpy(&results.value, resultsValue, MemoryLayout<Float32>.size * 1)
-
-
         return results
     }
 }

@@ -11,7 +11,7 @@ struct MainMenuView: View {
     @Binding var showingGame: Bool
     
     @Binding var settings: GameSettings
-        
+    
     let model: ModelDataHandler? = ModelDataHandler()
     
     var body: some View {
@@ -53,30 +53,30 @@ struct MainMenuView: View {
                     showingGame = true
                     settings.aiOpponent = false
                     
-                                        
+                    
                 }) {
                     Text("Player\nvs\nPlayer")
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .foregroundColor(.red)
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .foregroundColor(.red)
                         .multilineTextAlignment(.center)
                         .padding()
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.red, lineWidth: 5)
-                            )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.red, lineWidth: 5)
+                        )
                 }
                 Spacer()
                 
                 Slider(value: $settings.MCTSsims, in: 200...10000, step:100)
                 
                 Spacer()
-
+                
             }
-
-
+            
+            
         }
-
+        
     }
 }
 

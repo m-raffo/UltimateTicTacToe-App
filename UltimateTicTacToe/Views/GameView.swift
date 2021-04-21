@@ -51,7 +51,7 @@ struct GameView: View {
     @State var mcts:MCTS = MCTS();
     
     @Binding var settings: GameSettings
-            
+    
     var body: some View {
         ZStack {
             let textStatus = ["", "X", "O", "T"]
@@ -89,7 +89,7 @@ struct GameView: View {
                     path.move(to: CGPoint(x: po, y: po + offsetAmountY + h * 2 + lineWidth / 2  - lineWidth / 4))
                     path.addLine(to: CGPoint(x: po + 3 * h, y: po + offsetAmountY + h * 2 + lineWidth / 2 - lineWidth / 4 ))
                     
-
+                    
                 }
                 .stroke(Color.black, lineWidth: CGFloat(lineWidth))
                 
@@ -97,28 +97,28 @@ struct GameView: View {
                     ForEach(0..<3) { boardY in
                         // Miniboard
                         if game.boardStates[boardY * 3 + boardX] == 0 {
-                        Path { path in
-                            let boardPixelX = po + p + h * boardX
-                            let boardPixelY = po + p + h * boardY + offsetAmountY
-                                + -2 * boardY + 2
-                            // Vertical lines
-                            path.move(to: CGPoint(x: boardPixelX + hi + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 4))
-                            path.addLine(to: CGPoint(x: boardPixelX + hi + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 3 * hi - 4))
-                            
-                            path.move(to: CGPoint(x: boardPixelX + hi * 2 + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 4))
-                            path.addLine(to: CGPoint(x: boardPixelX + hi * 2 + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 3 * hi - 4))
-                            
-                            // Horizontal lines
-                            path.move(to: CGPoint(x: boardPixelX + 4, y: boardPixelY + hi + miniWidth / 2 - miniWidth / 4))
-                            path.addLine(to: CGPoint(x: boardPixelX + 3 * hi - 4, y: boardPixelY + hi + miniWidth / 2 - miniWidth / 4))
-                            
-                            
-                            path.move(to: CGPoint(x: boardPixelX  + 4, y: boardPixelY + hi * 2 + miniWidth / 2 - miniWidth / 4))
-                            path.addLine(to: CGPoint(x: boardPixelX + 3 * hi - 4, y: boardPixelY + hi * 2 + miniWidth / 2 - miniWidth / 4))
-                            
-
-                        }
-                        .stroke(Color.black, lineWidth: CGFloat(miniWidth))
+                            Path { path in
+                                let boardPixelX = po + p + h * boardX
+                                let boardPixelY = po + p + h * boardY + offsetAmountY
+                                    + -2 * boardY + 2
+                                // Vertical lines
+                                path.move(to: CGPoint(x: boardPixelX + hi + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 4))
+                                path.addLine(to: CGPoint(x: boardPixelX + hi + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 3 * hi - 4))
+                                
+                                path.move(to: CGPoint(x: boardPixelX + hi * 2 + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 4))
+                                path.addLine(to: CGPoint(x: boardPixelX + hi * 2 + miniWidth / 2 - miniWidth / 4, y: boardPixelY + 3 * hi - 4))
+                                
+                                // Horizontal lines
+                                path.move(to: CGPoint(x: boardPixelX + 4, y: boardPixelY + hi + miniWidth / 2 - miniWidth / 4))
+                                path.addLine(to: CGPoint(x: boardPixelX + 3 * hi - 4, y: boardPixelY + hi + miniWidth / 2 - miniWidth / 4))
+                                
+                                
+                                path.move(to: CGPoint(x: boardPixelX  + 4, y: boardPixelY + hi * 2 + miniWidth / 2 - miniWidth / 4))
+                                path.addLine(to: CGPoint(x: boardPixelX + 3 * hi - 4, y: boardPixelY + hi * 2 + miniWidth / 2 - miniWidth / 4))
+                                
+                                
+                            }
+                            .stroke(Color.black, lineWidth: CGFloat(miniWidth))
                         }
                     }
                 }
@@ -129,29 +129,29 @@ struct GameView: View {
             GeometryReader { geometry in
                 // Amount of space above the board
                 let offsetAmountY: Int = (Int(geometry.size.height) - Int(geometry.size.width)) / 2
-
+                
                 VStack {
-
-                // Width of a miniboard
-                let h: Int = (Int(geometry.size.width) - 2 * po) / 3
-
-                VStack {
-                ForEach(0..<3) { boardX in
-                    HStack {
-                    ForEach(0..<3) { boardY in
-                        Text(textStatus[game.boardStates[boardY + boardX * 3]])
-                            .fontWeight(.bold)
-                            .font(.system(size:CGFloat(h)))
-                            .frame(width: CGFloat(h - p / 2), height: CGFloat(h), alignment: .center)
-                            .scaledToFit()
-                            .foregroundColor(textColor[game.boardStates[boardY + boardX * 3]])
+                    
+                    // Width of a miniboard
+                    let h: Int = (Int(geometry.size.width) - 2 * po) / 3
+                    
+                    VStack {
+                        ForEach(0..<3) { boardX in
+                            HStack {
+                                ForEach(0..<3) { boardY in
+                                    Text(textStatus[game.boardStates[boardY + boardX * 3]])
+                                        .fontWeight(.bold)
+                                        .font(.system(size:CGFloat(h)))
+                                        .frame(width: CGFloat(h - p / 2), height: CGFloat(h), alignment: .center)
+                                        .scaledToFit()
+                                        .foregroundColor(textColor[game.boardStates[boardY + boardX * 3]])
+                                    
+                                }
+                            }
                             
-                    }
-                    }
-
-                }
-                }.padding(CGFloat(po))
-
+                        }
+                    }.padding(CGFloat(po))
+                    
                 }.offset(y: CGFloat(offsetAmountY))
                 
                 

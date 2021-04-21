@@ -41,7 +41,7 @@ struct MCTS {
                 
                 SearchPostNN(mcts, result)
             }
-
+            
         }
         
     }

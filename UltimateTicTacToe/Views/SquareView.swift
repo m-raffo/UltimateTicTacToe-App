@@ -14,16 +14,16 @@ struct SquareView: View {
     var backColor: Color = Color(white: 0.96)
     
     static var feedbackGenerator: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-        
+    
     @Binding var game:Game
     
     @Binding var settings: GameSettings
-
+    
     
     @State var currentText: String = ""
     
     static let pieceStrings = [0: " ", 1: "X", 2: "O"]
-        
+    
     var body: some View {
         Button(action: {
             print("\(index) pressed")
@@ -34,7 +34,7 @@ struct SquareView: View {
                 
                 if IsValidMove(game.game, b, p) == 1 {
                     SquareView.feedbackGenerator.impactOccurred()
-
+                    
                     game.aiMove = settings.aiOpponent
                     game.move(board: Int(b), piece: Int(p))
                     
@@ -63,7 +63,7 @@ struct SquareView: View {
                             game.move(board: b, piece: p)
                             
                             SquareView.feedbackGenerator.impactOccurred()
-
+                            
                             
                             game.board[compAction] = Int(GetPosition(game.game, Int32(b), Int32(p)))
                             game.aiMove = false
@@ -93,9 +93,9 @@ struct SquareView: View {
                     .scaledToFit()
                     .foregroundColor(SquareView.pieceStrings[game.board[index]] ?? " " == "X" ? game.theme.xColor : game.theme.oColor)
             }
-
-                
-//                .background(index % 2 == 0 ? accentColor : backColor)
+            
+            
+            //                .background(index % 2 == 0 ? accentColor : backColor)
         }.frame(minWidth: size, minHeight: size)
         
     }

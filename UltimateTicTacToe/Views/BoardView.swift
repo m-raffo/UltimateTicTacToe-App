@@ -15,7 +15,7 @@ struct BoardView: View {
     var po: Int
     
     @Binding var game:Game
-        
+    
     @Binding var settings: GameSettings
     
     @ViewBuilder
@@ -38,36 +38,36 @@ struct BoardView: View {
                                 ForEach(0..<3) { boardX in
                                     // Stack of rows of spaecs (ie boards)
                                     
-                                        
-                                        
-//                                        Text("X")
-//                                        .fontWeight(.bold)
-//                                        .font(.system(50))
-////                                        .frame(minWidth: size * 0.8, minHeight: size * 0.8)
-//                                        .scaledToFit()
-//                                            .foregroundColor(.red)
+                                    
+                                    
+                                    //                                        Text("X")
+                                    //                                        .fontWeight(.bold)
+                                    //                                        .font(.system(50))
+                                    ////                                        .frame(minWidth: size * 0.8, minHeight: size * 0.8)
+                                    //                                        .scaledToFit()
+                                    //                                            .foregroundColor(.red)
                                     let newColor = game.boardStates[boardY * 3 + boardX] == 0 ? game.bgColors[boardY * 3 + boardX] : Color.white
-//                                    if game.boardStates[boardY * 3 + boardX] == 0 {
-//                                        newColor = game.bgColors[boardY * 3 + boardX]
-//                                    } else {
-//                                        newColor = Color.white
-//                                    }
-                                        VStack () {
-                                            
-                                                                                                    
-                                            ForEach(0..<3) { y in
-                                                HStack(spacing:0) {
-                                                    ForEach(0..<3) {x in
-                                                        
-                                                        SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), game: $game, settings: $settings)
-                                                    }
-                                                    
-                                                }
-                                            }
-                                                
-                                            
-                                        }.background(newColor)
+                                    //                                    if game.boardStates[boardY * 3 + boardX] == 0 {
+                                    //                                        newColor = game.bgColors[boardY * 3 + boardX]
+                                    //                                    } else {
+                                    //                                        newColor = Color.white
+                                    //                                    }
+                                    VStack () {
                                         
+                                        
+                                        ForEach(0..<3) { y in
+                                            HStack(spacing:0) {
+                                                ForEach(0..<3) {x in
+                                                    
+                                                    SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), game: $game, settings: $settings)
+                                                }
+                                                
+                                            }
+                                        }
+                                        
+                                        
+                                    }.background(newColor)
+                                    
                                     
                                 }
                             }.padding(CGFloat(p /  2))
@@ -76,7 +76,7 @@ struct BoardView: View {
                     }
                     Spacer()
                 }
-
+                
             }
             
         }

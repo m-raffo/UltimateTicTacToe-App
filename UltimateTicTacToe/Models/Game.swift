@@ -27,7 +27,7 @@ struct Game {
     var requiredBoard: Int = -1
     
     var theme = Theme()
-
+    
     var bgColors: [Color] = [Color](repeating: Color.white, count: 9)
     
     /**
