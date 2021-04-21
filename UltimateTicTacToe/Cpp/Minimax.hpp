@@ -1,19 +1,20 @@
 #pragma once
 
-#include "GameState.hpp"
 #include <bitset>
-#include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <vector>
+
+#include "GameState.hpp"
 
 const int c1 = 2, c2 = 1, cw = 10, cl = 0, ct = 0;
 
 struct constants {
-    int c1 = 2, c2 = 1, cw = 10, cl = 0, ct = 0;
+  int c1 = 2, c2 = 1, cw = 10, cl = 0, ct = 0;
 };
 
 struct dualEvals {
-    float x, o;
+  float x, o;
 };
 
 float evaluate(GameState board, constants c);
@@ -21,21 +22,17 @@ float evaluate(GameState board, constants c);
 float miniboardEvalOneSide(std::bitset<20> miniboard, int side, constants c);
 
 const int winningPossibilities[9][4][2] = {
-    {{1, 2}, {4, 8}, {3, 6}, {-1, -1}},
-    {{4, 7}, {0, 2}, {-1, -1}, {-1, -1}},
-    {{4, 6}, {0, 1}, {5, 8}, {-1, -1}},
-    {{0, 6}, {4, 5}, {-1, -1}, {-1, -1}},
-    {{0, 8}, {1, 7}, {2, 6}, {3, 5}},
-    {{3, 4}, {2, 8}, {-1, -1}, {-1, -1}},
-    {{0, 3}, {7, 8}, {4, 2}, {-1, -1}},
-    {{6, 8}, {1, 4}, {-1, -1}, {-1, -1}},
+    {{1, 2}, {4, 8}, {3, 6}, {-1, -1}}, {{4, 7}, {0, 2}, {-1, -1}, {-1, -1}},
+    {{4, 6}, {0, 1}, {5, 8}, {-1, -1}}, {{0, 6}, {4, 5}, {-1, -1}, {-1, -1}},
+    {{0, 8}, {1, 7}, {2, 6}, {3, 5}},   {{3, 4}, {2, 8}, {-1, -1}, {-1, -1}},
+    {{0, 3}, {7, 8}, {4, 2}, {-1, -1}}, {{6, 8}, {1, 4}, {-1, -1}, {-1, -1}},
     {{0, 4}, {6, 7}, {2, 5}, {-1, -1}},
 };
 
 /**
  * Calculated locations of all winning possibilities for x. Add 1 for o
  */
-const int winningPossibilitiesLocations[9][4][2] =  {
+const int winningPossibilitiesLocations[9][4][2] = {
     {{4, 6}, {10, 18}, {8, 14}, {-1, -1}},
     {{10, 16}, {2, 6}, {-1, -1}, {-1, -1}},
     {{10, 14}, {2, 4}, {12, 18}, {-1, -1}},
@@ -48,77 +45,80 @@ const int winningPossibilitiesLocations[9][4][2] =  {
 };
 
 struct significances {
-    float sigsX[9];
-    float sigsO[9];
+  float sigsX[9];
+  float sigsO[9];
 };
 
-significances calcSignificances(std::bitset<20> fullBoard[9], float evaluationsX[9], float evaluationsY[9]);
+significances calcSignificances(std::bitset<20> fullBoard[9],
+                                float evaluationsX[9], float evaluationsY[9]);
 
 const int wonSig = 10, lostSig = 0, tieSig = 0;
 
-class Node{
-    private:
-        float eval;
+class Node {
+ private:
+  float eval;
 
+ public:
+  bool hasChildren = false;
 
-    public:
-        bool hasChildren = false;
+  Node(GameState currentBoard, int currentDepth);
+  Node(GameState currentBoard, int currentDepth, Node *currentParent);
+  Node();
+  GameState board;
 
-        Node(GameState currentBoard, int currentDepth);
-        Node(GameState currentBoard, int currentDepth, Node *currentParent);
-        Node();
-        GameState board;
+  int infDepth = -1;
+  int depth = 0;
+  bool pruned = false;
 
-        int infDepth = -1;
-        int depth = 0;
-        bool pruned = false;
+  std::vector<Node> children;
+  Node *parent;
+  void addChildren();
 
-        std::vector<Node> children;
-        Node *parent;
-        void addChildren();
+  float getEval();
 
-        
+  int evaluationPerformed = 0;
+  float w = 0;
+  float p = 0;
+  // N is the number of times the board was visited in a simulation
+  // Na is the number of times the board was taken as an action
+  int n = 0;
 
-        float getEval();
-
-        int evaluationPerformed = 0;
-        float w = 0;
-        float p = 0;
-        // N is the number of times the board was visited in a simulation
-        // Na is the number of times the board was taken as an action
-        int n = 0;
-
-        float v = 0;
+  float v = 0;
 };
 
 struct nodeAndEval {
-    Node n;
-    float e;
+  Node n;
+  float e;
 };
 
 bool compareEval(nodeAndEval a, nodeAndEval b);
 
-
 struct timeLimitedSearchResult {
-    bool complete = false;
-    float result;
+  bool complete = false;
+  float result;
 };
 
-
-
-float minimax(Node (&node), int depth, float alpha, float beta, bool maximizingPlayer, constants c);
-timeLimitedSearchResult minimaxTimeLimited(Node (&node), int depth, float alpha, float beta, bool maximizingPlayer, int time, constants c);
+float minimax(Node(&node), int depth, float alpha, float beta,
+              bool maximizingPlayer, constants c);
+timeLimitedSearchResult minimaxTimeLimited(Node(&node), int depth, float alpha,
+                                           float beta, bool maximizingPlayer,
+                                           int time, constants c);
 
 GameState minimaxSearch(GameState position, int depth, bool playAsX);
-GameState minimaxSearch(GameState position, int depth, bool playAsX, constants c);
+GameState minimaxSearch(GameState position, int depth, bool playAsX,
+                        constants c);
 
 boardCoords minimaxSearchMove(GameState position, int depth, bool playAsX);
-boardCoords minimaxSearchMove(GameState position, int depth, bool playAsX, constants c);
+boardCoords minimaxSearchMove(GameState position, int depth, bool playAsX,
+                              constants c);
 
 GameState minimaxSearchTime(GameState position, int time, bool playAsX);
-GameState minimaxSearchTime(GameState position, int time, bool playAsX, constants c);
+GameState minimaxSearchTime(GameState position, int time, bool playAsX,
+                            constants c);
 
 boardCoords minimaxSearchTimeMove(GameState position, int time, bool playAsX);
-boardCoords minimaxSearchTimeMove(GameState position, int time, bool playAsX, constants c);
+boardCoords minimaxSearchTimeMove(GameState position, int time, bool playAsX,
+                                  constants c);
 
-int computerVcomputer(int depth1, constants c1, int depth2, constants c2, bool displayGames);
+int computerVcomputer(int depth1, constants c1, int depth2, constants c2,
+                      bool displayGames);
