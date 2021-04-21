@@ -14,6 +14,9 @@ struct Game {
     
     var boardStates: [Int] = [Int](repeating: 0, count: 9)
     
+    var player1Time: String = "00:00"
+    var player2Time: String = "00:00"
+    
     /// Pointer to the GameState object
     var game: OpaquePointer? = CreateGameState()
     
@@ -22,13 +25,14 @@ struct Game {
     /// True if AI is making a move and the player cannot make a move
     var aiMove: Bool = false
     
-    
     /// Set to the required board or -1 if none
     var requiredBoard: Int = -1
     
     var theme = Theme()
     
     var bgColors: [Color] = [Color](repeating: Color.white, count: 9)
+    
+    var clock: GameClock = GameClock(duration: 20, increment: 0, delay: 0)
     
     /**
      Gets the color to highlight the background of valid boards with.
@@ -46,6 +50,20 @@ struct Game {
         mcts.TakeAction(action: board * 9 + piece)
         
         self.boardStates[board] = Int(GetBoardStatus(game, Int32(board)))
+        
+        clock.switchTurn()
+        print("Player 1 time")
+        print(clock.timeFormatted(player: 1))
+        print("Player 2 time")
+        print(clock.timeFormatted(player: 2))
+        print("======")
+
+    }
+    
+    mutating func UpdateTimers() {
+        player1Time = clock.timeFormatted(player: 1)
+        player2Time = clock.timeFormatted(player: 2)
+
     }
     
 }

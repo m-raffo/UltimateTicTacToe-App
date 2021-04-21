@@ -27,6 +27,16 @@ struct SquareView: View {
     var body: some View {
         Button(action: {
             print("\(index) pressed")
+            if game.clock.currentPlayer == 0 {
+                game.clock.currentPlayer = 1
+                game.clock.startClock()
+                
+                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                    game.UpdateTimers()
+                }
+
+            }
+            
             if !game.aiMove {
                 
                 let b = Int32(index / 9)
