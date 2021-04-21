@@ -30,14 +30,7 @@ using namespace std;
 // };
 
     int checkMiniboardResultsWithTie(bitset<20> miniboard) {
-        /**
-         * Evaluates the give miniboard to check for a win, including the possibility that a square is tied.
-         * This is necessary for checking for wins on the larger, overall board.
-         * 0: Ongoing game
-         * 1: X win
-         * 2: O win
-         * 3: Tie
-         */
+
 
         bitset<20> posToCheck;
 
@@ -104,13 +97,7 @@ using namespace std;
 
 
     int checkMiniboardResults(bitset<20> miniboard) {
-        /**
-         * Evaluates the given miniboard to check for wins.
-         * 0: Ongoing game
-         * 1: X win
-         * 2: O win
-         * 3: Tie
-         */
+
         bitset<20> posToCheck;
 
         // If the position is empty, return 0
@@ -159,13 +146,6 @@ using namespace std;
 
 
     int getMiniboardResults(bitset<20> miniboard) {
-        /**
-         * Gets result if miniboard has been marked with final result. Will not check for wins for the benefit of computation speed.
-         * 0: Ongoing game
-         * 1: X wins
-         * 2: O wins
-         * 3: Tie
-         */
 
         // Tie
         if (miniboard[0] && miniboard[1]) {
@@ -277,13 +257,6 @@ using namespace std;
     }
 
     int GameState::getPosition(int boardLocation, int pieceLocation) {
-        /**
-         * Gets the piece in the specified location in the board.
-         * 
-         * @param boardLocation The board (from 0 to 8) to get
-         * @param pieceLocation The piece (fromr 0 to 8) to get
-         * @return 0 if the position is empty, 1 if the position is claimed by X, and 2 if the position is claimed by O
-         */
 
         // Miniboards are 20 bits longs
         // Spots are 2 bits long
@@ -301,14 +274,6 @@ using namespace std;
     }
 
     void GameState::setPosition(int boardLocation, int pieceLocation, int piece) {
-        /**
-         * Sets the specificed location in the board to the given piece.
-         * 
-         * @param boardLocation The board (from 0 to 8) to get
-         * @param pieceLocation The piece (fromr 0 to 8) to get
-         * @param piece The piece to set. 1 for X; 2 for O; 0 for empty
-         * @return void
-         */
 
         int location = (2 * pieceLocation) + 2;
 
@@ -325,9 +290,6 @@ using namespace std;
     }
 
     void GameState::move(int boardLoaction, int pieceLocation) {
-        /**
-         * Performs the specificed move on the board, moving the piece whose turn it is, and flipping toMove.
-         */
 
         setPosition(boardLoaction, pieceLocation, getToMove());
         updateSignleMiniboardStatus(boardLoaction);
@@ -345,10 +307,7 @@ using namespace std;
     }
 
     void GameState::updateMiniboardStatus() {
-        /**
-         * Updates the game statuses of all the miniboards, checking to see if any of them are won.
-         * If a position is won for both O and X and not already marked, it will be marked as a win for X.
-         */
+
 
         // Loop through each miniboard
         for (int i = 0; i <= 8; i++) {
@@ -360,9 +319,7 @@ using namespace std;
     }
 
     void GameState::updateSignleMiniboardStatus(int boardIndex) {
-        /**
-         * Updates the status of a single miniboard to see if it is claimed.
-         */
+
         // Check if already marked as a finished position
         if (board[boardIndex][0] || board[boardIndex][1]) {
             return;
@@ -393,17 +350,6 @@ using namespace std;
     }
 
     int GameState::getBoardStatus(int boardLocation) {
-        /**
-         * Gets the status of the given miniboard.
-         * Important: GameState.updateMiniboardStatus() MUST be called before this function to ensure correct results.
-         * 
-         * 0: Ongoing game
-         * 1: X wins
-         * 2: O wins
-         * 3: Tie
-         * @param boardLocation the board to check from 0 to 8
-         * @return the status
-         */
 
         // Tie
         if (board[boardLocation][0] && board[boardLocation][1]) {
@@ -427,16 +373,7 @@ using namespace std;
     }
 
     int GameState::getStatus() {
-        /**
-         * Gets the status of the entire game.
-         * Important: GameState.updateMiniboardStatus() MUST be called before this function to ensure correct results.
-         * 
-         * 0: Ongoing game
-         * 1: X wins
-         * 2: O wins
-         * 3: Tie
-         * @return the status
-         */
+
         bitset<20> boardResults;
 
         // TODO: Assign two bits in GameState.info to track if the game has been evaluated to a winning position
@@ -474,9 +411,6 @@ using namespace std;
     }
 
     GameState GameState::getCopy() {
-        /**
-         * Gets a copy of the board
-         */
 
         GameState copyBoard;
 
@@ -603,9 +537,7 @@ using namespace std;
     }
 
     boardCoords GameState::absoluteIndexToBoardAndPiece(int i) {
-        /**
-         * Gets the board and piece of an absolute index of the full size 9x9 board.
-         */
+
 
         /*
         i = index
@@ -701,9 +633,6 @@ using namespace std;
     }
 
     void GameState::displayGame() {
-        /**
-         * Converts the current board to a human-readable string representation and writes it to cout.
-         */
 
         if (getToMove() == 1) {
             cout << "X to move\n";
@@ -759,28 +688,7 @@ using namespace std;
 
     }
 
-    vector<int> GameState::getBoardBitset() {
-        /**
-         * Gets a representation of the board as a single
-         * bitset object.
-         * 
-         * The board is stored in the form 9 boards of 22 bits.
-         * 
-         * Bits 0-17 store the state of each of the 9 spots. If 
-         * the first bit is set, player 1 has this 
-         * spot, if the second bit is set, the player 2 has the
-         * spot.
-         * 
-         * Bit 18 is set if player 1 has won the board
-         * Bit 19 is set if player 2 has won the board
-         * Bit 20 is set if the board is tied
-         * 
-         * Bit 21 is set if the player is allowed to move on the
-         * board
-         * 
-         * Bit 198 of the bitset is set if player 1 (X) is to
-         * move and unset if player 2 (O) is to move
-         */
+    std::vector<int> GameState::getBoardBitset() {
 
         bitset<199> result;
 
@@ -846,29 +754,7 @@ using namespace std;
     };
 
     vector<int> GameState::getCanonicalBoard() {
-        /**
-         * Gets the current board in the Canonical form for
-         * input to the NN.
-         * 
-         * The board is stored in the form 9 boards of 22 bits.
-         * 
-         * Bits 0-17 store the state of each of the 9 spots. If 
-         * the first bit is set, the player to move has this 
-         * spot, if the second bit is set, the opposing player
-         * has the spot.
-         * 
-         * Bit 18 is set if the player to move has won the board
-         * Bit 19 is set if the opposing player has won the board
-         * Bit 20 is set if the board is tied
-         * 
-         * Bit 21 is set if the player is allowed to move on the
-         * board
-         * 
-         * Bit 199 is unused; it is leftover from saving toMove
-         * on a full board.
-         * 
-         * Board is then converted to a vector<int> for output
-         */
+
         bitset<199> canonical;
 
         int toMove = getToMove();
@@ -1012,34 +898,7 @@ using namespace std;
     }
 
     bitset<199> GameState::getCanonicalBoardBitset() {
-        /**
-         * Gets the current board in the Canonical form for
-         * input to the NN.
-         * 
-         * The board is stored in the form 9 boards of 22 bits.
-         * 
-         * Bits 0-17 store the state of each of the 9 spots. If 
-         * the first bit is set, the player to move has this 
-         * spot, if the second bit is set, the opposing player
-         * has the spot.
-         * 
-         * Bit 18 is set if the player to move has won the board
-         * Bit 19 is set if the opposing player has won the board
-         * Bit 20 is set if the board is tied
-         * 
-         * Bit 21 is set if the player is allowed to move on the
-         * board
-         * 
-         * Bit 199 is unused; it is leftover from saving toMove
-         * on a full board.
-         * 
-         * If a player has won a miniboard, all of the bits
-         * corresponding to spots on that miniboard will be set
-         * for that player, and none of the spots for the
-         * opponent.
-         * 
-         * Board is then converted to a vector<int> for output
-         */
+
         bitset<199> canonical;
 
         int toMove = getToMove();

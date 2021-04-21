@@ -14,9 +14,10 @@ struct SquareView: View {
     var backColor: Color = Color(white: 0.96)
     
     static var feedbackGenerator: UIImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-    
+        
     @Binding var game:Game
-    @Binding var mctsSims: Double
+    
+    @Binding var settings: GameSettings
 
     
     @State var currentText: String = ""
@@ -34,7 +35,7 @@ struct SquareView: View {
                 if IsValidMove(game.game, b, p) == 1 {
                     SquareView.feedbackGenerator.impactOccurred()
 
-                    game.aiMove = true
+                    game.aiMove = settings.aiOpponent
                     game.move(board: Int(b), piece: Int(p))
                     
                     game.board[index] = Int(GetPosition(game.game, b, p))
@@ -44,36 +45,40 @@ struct SquareView: View {
                     
                     if game.requiredBoard > -1 {
                         game.bgColors = [Color](repeating: Color.white, count: 9)
-                        game.bgColors[game.requiredBoard] = Color(red: 36/255, green: 160/255, blue: 1, opacity: 0.5)
+                        game.bgColors[game.requiredBoard] = game.CurrentColor()
                     } else {
-                        game.bgColors = [Color](repeating: Color(red: 36/255, green: 160/255, blue: 1, opacity: 0.5), count: 9)
+                        game.bgColors = [Color](repeating: game.CurrentColor(), count: 9)
                     }
                     
-                    // Start the computer thinking about its response
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        game.mcts.PerformIterations(num: Int(mctsSims))
-                        
-                        let compAction = game.mcts.GetBestMove()
-                        
-                        let b: Int = compAction / 9
-                        let p: Int = compAction % 9
-                        
-                        game.move(board: b, piece: p)
-                        
-                        SquareView.feedbackGenerator.impactOccurred()
+                    if settings.aiOpponent {
+                        // Start the computer thinking about its response
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            game.mcts.PerformIterations(num: Int(settings.MCTSsims))
+                            
+                            let compAction = game.mcts.GetBestMove()
+                            
+                            let b: Int = compAction / 9
+                            let p: Int = compAction % 9
+                            
+                            game.move(board: b, piece: p)
+                            
+                            SquareView.feedbackGenerator.impactOccurred()
 
-                        
-                        game.board[compAction] = Int(GetPosition(game.game, Int32(b), Int32(p)))
-                        game.aiMove = false
-                        game.requiredBoard = Int(GetRequiredBoard(game.game))
-                        
-                        if game.requiredBoard > -1 {
-                            game.bgColors = [Color](repeating: Color.white, count: 9)
-                            game.bgColors[game.requiredBoard] = Color(red: 1, green: 87/255, blue: 87/255, opacity: 0.5)
-                        } else {
-                            game.bgColors = [Color](repeating: Color(red: 1, green: 87/255, blue: 87/255, opacity: 0.5), count: 9)
+                            
+                            game.board[compAction] = Int(GetPosition(game.game, Int32(b), Int32(p)))
+                            game.aiMove = false
+                            game.requiredBoard = Int(GetRequiredBoard(game.game))
+                            
+                            if game.requiredBoard > -1 {
+                                game.bgColors = [Color](repeating: Color.white, count: 9)
+                                game.bgColors[game.requiredBoard] = game.CurrentColor()
+                            } else {
+                                game.bgColors = [Color](repeating: game.CurrentColor(), count: 9)
+                            }
                         }
                     }
+                    
+                    
                 }
             }
             
@@ -86,7 +91,7 @@ struct SquareView: View {
                     .font(.system(size:size * 0.8))
                     .frame(minWidth: size * 0.8, minHeight: size * 0.8)
                     .scaledToFit()
-                    .foregroundColor(SquareView.pieceStrings[game.board[index]] ?? " " == "X" ? .red : .blue)
+                    .foregroundColor(SquareView.pieceStrings[game.board[index]] ?? " " == "X" ? game.theme.xColor : game.theme.oColor)
             }
 
                 
@@ -98,6 +103,6 @@ struct SquareView: View {
 
 struct SquareView_Previews: PreviewProvider {
     static var previews: some View {
-        SquareView(index: 1, size: 60, game: .constant(Game()), mctsSims: .constant(500))
+        SquareView(index: 1, size: 60, game: .constant(Game()), settings: .constant(GameSettings()))
     }
 }

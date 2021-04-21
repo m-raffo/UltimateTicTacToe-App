@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		06C4A960E85644F3A1F3ACD5 /* Pods_UltimateTicTacToe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1191567B6FDAE0D70AF28D /* Pods_UltimateTicTacToe.framework */; };
 		930CBE3F26273AF40046086D /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CBE3E26273AF40046086D /* SquareView.swift */; };
+		9352124B26305CD8005B9777 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9352124A26305CD8005B9777 /* Theme.swift */; };
+		9352124E2630640E005B9777 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9352124D2630640E005B9777 /* GameSettings.swift */; };
 		9360475B2627257500DC8922 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475A2627257500DC8922 /* MainMenuView.swift */; };
 		9360475E26272EE400DC8922 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9360475D26272EE400DC8922 /* GameView.swift */; };
 		93785E4B2627D4E8004FB1F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93785E4A2627D4E8004FB1F0 /* BoardView.swift */; };
@@ -30,6 +32,8 @@
 		56BA9B1999D91639DD76E73B /* Pods-UltimateTicTacToe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltimateTicTacToe.release.xcconfig"; path = "Target Support Files/Pods-UltimateTicTacToe/Pods-UltimateTicTacToe.release.xcconfig"; sourceTree = "<group>"; };
 		68F4E76A9BFCD69FA753DE8E /* Pods-UltimateTicTacToe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UltimateTicTacToe.debug.xcconfig"; path = "Target Support Files/Pods-UltimateTicTacToe/Pods-UltimateTicTacToe.debug.xcconfig"; sourceTree = "<group>"; };
 		930CBE3E26273AF40046086D /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
+		9352124A26305CD8005B9777 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		9352124D2630640E005B9777 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		9360475A2627257500DC8922 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		9360475D26272EE400DC8922 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		93785E4A2627D4E8004FB1F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -90,9 +94,11 @@
 		937B88A726286F47007F030C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9352124A26305CD8005B9777 /* Theme.swift */,
 				93CEB180262CBB380085EAE1 /* ModelDataHandler.swift */,
 				937B88A82628721A007F030C /* Game.swift */,
 				93CEB192262CDF3C0085EAE1 /* MCTS.swift */,
+				9352124D2630640E005B9777 /* GameSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 			files = (
 				9360475B2627257500DC8922 /* MainMenuView.swift in Sources */,
 				93CEB18D262CCD4B0085EAE1 /* GameState.cpp in Sources */,
+				9352124E2630640E005B9777 /* GameSettings.swift in Sources */,
 				93CEB181262CBB380085EAE1 /* ModelDataHandler.swift in Sources */,
 				930CBE3F26273AF40046086D /* SquareView.swift in Sources */,
 				937B88A92628721A007F030C /* Game.swift in Sources */,
@@ -275,6 +282,7 @@
 				93E9BE142625313300DB99B1 /* UltimateTicTacToeApp.swift in Sources */,
 				93CEB193262CDF3C0085EAE1 /* MCTS.swift in Sources */,
 				93CEB18B262CCD4B0085EAE1 /* MonteCarlo.cpp in Sources */,
+				9352124B26305CD8005B9777 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

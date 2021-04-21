@@ -87,6 +87,8 @@ int IsValidMove(CGameState * c, int board, int piece);
 
 int GetRequiredBoard(CGameState * c);
 
+int GetToMove(CGameState * c);
+
 CboardCoords MinimaxSearchMove(CGameState * position, int depth, int playAsX);
 
 CboardCoords MinimaxSearchTimeMove(CGameState * position, int time, int playAsX);

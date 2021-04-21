@@ -22,10 +22,24 @@ struct Game {
     /// True if AI is making a move and the player cannot make a move
     var aiMove: Bool = false
     
+    
     /// Set to the required board or -1 if none
     var requiredBoard: Int = -1
+    
+    var theme = Theme()
 
     var bgColors: [Color] = [Color](repeating: Color.white, count: 9)
+    
+    /**
+     Gets the color to highlight the background of valid boards with.
+     */
+    func CurrentColor() -> Color {
+        if GetToMove(game) == 1 {
+            return theme.xBackground
+        }
+        
+        return theme.oBackground
+    }
     
     mutating func move(board: Int, piece: Int) {
         GameStateMove(game, Int32(board), Int32(piece))

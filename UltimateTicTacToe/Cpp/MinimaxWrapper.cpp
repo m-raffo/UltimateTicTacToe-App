@@ -109,3 +109,7 @@ int GetBoardStatus(CGameState * c, int board) {
     return c->getBoardStatus(board);
 };
 
+
+int GetToMove(CGameState * c) {
+    return c->getToMove();
+}

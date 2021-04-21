@@ -50,14 +50,14 @@ struct GameView: View {
     /// The Monte Carlo Search Tree behind the AI agent.
     @State var mcts:MCTS = MCTS();
     
-    @Binding var mctsSims: Double
+    @Binding var settings: GameSettings
             
     var body: some View {
         ZStack {
             let textStatus = ["", "X", "O", "T"]
             let textColor = [Color.white, Color.red, Color.blue, Color.black]
             
-            BoardView(p: p, po: po, game: $game, mctsSims: $mctsSims)
+            BoardView(p: p, po: po, game: $game, settings: $settings)
             
             
             GeometryReader { geometry in
@@ -135,9 +135,6 @@ struct GameView: View {
                 // Width of a miniboard
                 let h: Int = (Int(geometry.size.width) - 2 * po) / 3
 
-                // Width of space
-                let hi: Int = (h - 2 * p) / 3
-
                 VStack {
                 ForEach(0..<3) { boardX in
                     HStack {
@@ -165,6 +162,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(mctsSims: .constant(500))
+        GameView(settings: .constant(GameSettings()))
     }
 }

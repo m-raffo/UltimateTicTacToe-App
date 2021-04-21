@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainMenuView: View {
     @Binding var showingGame: Bool
-    @Binding var mctsSims: Double
+    
+    @Binding var settings: GameSettings
         
     let model: ModelDataHandler? = ModelDataHandler()
     
@@ -26,7 +27,9 @@ struct MainMenuView: View {
                 Spacer()
                 
                 Button(action: {
+                    SquareView.feedbackGenerator.prepare()
                     showingGame = true
+                    settings.aiOpponent = true
                 }) {
                     Text("Computer\nvs\nPlayer")
                         .fontWeight(.bold)
@@ -46,20 +49,10 @@ struct MainMenuView: View {
                 
                 Button(action:{
                     
-                    let game = CreateGameState();
-                    let mcts = CreateMCTS(1, 1);
+                    SquareView.feedbackGenerator.prepare()
+                    showingGame = true
+                    settings.aiOpponent = false
                     
-                    GameStateMove(game, 0, 1);
-                    GameStateMove(game, 1, 7);
-                    
-                    StartNewSearch(mcts, game);
-                    
-                    let nnInput = SearchPreNN(mcts);
-                    
-                    print(nnInput.board);
-                    
-                    ReleaseMCTS(mcts);
-                    ReleaseGameState(game);
                                         
                 }) {
                     Text("Player\nvs\nPlayer")
@@ -75,7 +68,7 @@ struct MainMenuView: View {
                 }
                 Spacer()
                 
-                Slider(value: $mctsSims, in: 200...10000, step:100)
+                Slider(value: $settings.MCTSsims, in: 200...10000, step:100)
                 
                 Spacer()
 
@@ -89,6 +82,6 @@ struct MainMenuView: View {
 
 struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMenuView(showingGame: .constant(true), mctsSims: .constant(500))
+        MainMenuView(showingGame: .constant(true), settings: .constant(GameSettings()))
     }
 }

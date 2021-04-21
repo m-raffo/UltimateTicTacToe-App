@@ -15,8 +15,8 @@ struct BoardView: View {
     var po: Int
     
     @Binding var game:Game
-    
-    @Binding var mctsSims: Double
+        
+    @Binding var settings: GameSettings
     
     @ViewBuilder
     var body: some View {
@@ -46,7 +46,7 @@ struct BoardView: View {
 ////                                        .frame(minWidth: size * 0.8, minHeight: size * 0.8)
 //                                        .scaledToFit()
 //                                            .foregroundColor(.red)
-                                    var newColor = game.boardStates[boardY * 3 + boardX] == 0 ? game.bgColors[boardY * 3 + boardX] : Color.white
+                                    let newColor = game.boardStates[boardY * 3 + boardX] == 0 ? game.bgColors[boardY * 3 + boardX] : Color.white
 //                                    if game.boardStates[boardY * 3 + boardX] == 0 {
 //                                        newColor = game.bgColors[boardY * 3 + boardX]
 //                                    } else {
@@ -59,7 +59,7 @@ struct BoardView: View {
                                                 HStack(spacing:0) {
                                                     ForEach(0..<3) {x in
                                                         
-                                                        SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), game: $game, mctsSims: $mctsSims)
+                                                        SquareView(index: (boardY * 3 + boardX) * 9 + y * 3 + x, size: CGFloat(hi), game: $game, settings: $settings)
                                                     }
                                                     
                                                 }
@@ -85,6 +85,6 @@ struct BoardView: View {
 
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
-        BoardView(p: 10, po: 5, game: .constant(Game()), mctsSims: .constant(500))
+        BoardView(p: 10, po: 5, game: .constant(Game()), settings: .constant(GameSettings()))
     }
 }

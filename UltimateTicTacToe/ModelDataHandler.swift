@@ -59,8 +59,8 @@ class ModelDataHandler {
         let valueBuffer = UnsafeMutableBufferPointer<Float32>(start: value, count: 1)
         let policyBuffer = UnsafeMutableBufferPointer<Float32>(start: policy, count: 81)
 
-        valueOutput.data.copyBytes(to: valueBuffer)
-        policyOutput.data.copyBytes(to: policyBuffer)
+        let _ = valueOutput.data.copyBytes(to: valueBuffer)
+        let _ = policyOutput.data.copyBytes(to: policyBuffer)
         
         results.value = value.pointee
         memcpy(&results.policy, policy, 81 * MemoryLayout<Float32>.size)

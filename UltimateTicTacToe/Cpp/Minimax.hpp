@@ -1,5 +1,4 @@
 #pragma once
-using namespace std;
 
 #include "GameState.hpp"
 #include <bitset>
@@ -19,7 +18,7 @@ struct dualEvals {
 
 float evaluate(GameState board, constants c);
 
-float miniboardEvalOneSide(bitset<20> miniboard, int side, constants c);
+float miniboardEvalOneSide(std::bitset<20> miniboard, int side, constants c);
 
 const int winningPossibilities[9][4][2] = {
     {{1, 2}, {4, 8}, {3, 6}, {-1, -1}},
@@ -53,7 +52,7 @@ struct significances {
     float sigsO[9];
 };
 
-significances calcSignificances(bitset<20> fullBoard[9], float evaluationsX[9], float evaluationsY[9]);
+significances calcSignificances(std::bitset<20> fullBoard[9], float evaluationsX[9], float evaluationsY[9]);
 
 const int wonSig = 10, lostSig = 0, tieSig = 0;
 
@@ -74,7 +73,7 @@ class Node{
         int depth = 0;
         bool pruned = false;
 
-        vector<Node> children;
+        std::vector<Node> children;
         Node *parent;
         void addChildren();
 
